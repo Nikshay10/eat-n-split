@@ -1,3 +1,9 @@
+import { useState } from "react";
+import Button from "./Button";
+import FriendList from "./FriendList";
+import FormAddFriend from "./FormAddFriend";
+import FormSplitBill from "./FormSplitBill";
+
 const initialFriends = [
   {
     id: 118836,
@@ -19,84 +25,30 @@ const initialFriends = [
   },
 ];
 
-function Button({children}){
-  return(
-    <button className="button">{children}</button>
-  )
-}
 
-function Friend({friend}){
-  return (
-    <li>
-      <img src={friend.image} alt={friend.name} />
-      <h3>{friend.name}</h3>
-      {friend.balance === 0 && <p className="">You and {friend.name} are even</p>}
-      {friend.balance > 0 && <p className="green">{friend.name} owes you ${friend.balance}</p>}
-      {friend.balance < 0 && <p className="red">You owe {friend.name} ${Math.abs(friend.balance)}</p>}
-      <Button>Select</Button>
-    </li>
 
-  );
-}
-
-function FriendList(){
-  const friends = initialFriends 
-
-  return(
-      <ul>
-        {
-          friends.map(friend => <Friend key={friend.id} friend={friend} />)
-        }
-      </ul>
-  )
-}
-
-function FormAddFriend(){
-  return(
-    <form className="form-add-friend">
-      <label>🕺 Friend name</label>
-      <input type="text" />
-
-      <label>🌆Image URL</label>
-      <input type="text" />
-      <Button>Add</Button>
-    </form>
-  )
-}
-
-function FormSplitBill(){
-  return(
-    <form className="form-split-bill">
-      <h2>Split bill with x</h2>
-      <label>💸 Bill value</label>
-      <input type="text" />
-
-      <label>🕴 Your expenses</label>
-      <input type="text" />
-
-      <label>🕺 X's Expenses</label>
-      <input type="text" disabled/>
-
-      <label>💰 Who is paying the bill</label>
-      <select>
-        <option value="user">You</option>
-        <option value="friend">X</option>
-      </select>
-
-      <Button>Split Bill</Button>
-    </form>
-  )
-}
 
 export default function App(){
+  const [showAddFriend, setShowAddFriend] = useState(false)
+  const [friendList, setFriendList] = useState(initialFriends)
+
+  function addFriend(newFriend, event){
+    event.preventDefault()
+    setFriendList([...friendList, newFriend])
+  }
+
+  function handleShowAddFriend(){
+    setShowAddFriend(!showAddFriend)
+  }
+
   return(
     <div className="app">
       <div className="sidebar">
-        <FriendList />
-        <FormAddFriend />
-        <Button>Add Friend</Button>
+        <FriendList friends={friendList}/>
+        {showAddFriend && <FormAddFriend onAddFriend={addFriend}/>}
+        <Button onClick={handleShowAddFriend}>{showAddFriend ? 'Close' : 'Add Friend'}</Button>
       </div>
-      <FormSplitBill />
+      <FormSplitBill/>
     </div>
   )
 }
