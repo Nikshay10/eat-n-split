@@ -20,6 +20,12 @@ const initialFriends = [
   },
 ];
 
+function Button({children}){
+  return(
+    <button className="button">{children}</button>
+  )
+}
+
 function Friend({friend}){
   return (
     <li>
@@ -28,7 +34,7 @@ function Friend({friend}){
       {friend.balance === 0 && <p className="">You and {friend.name} are even</p>}
       {friend.balance > 0 && <p className="green">{friend.name} owes you ${friend.balance}</p>}
       {friend.balance < 0 && <p className="red">You owe {friend.name} ${Math.abs(friend.balance)}</p>}
-      <button className="button">Select</button>
+      <Button>Select</Button>
     </li>
 
   );
@@ -46,11 +52,26 @@ function FriendList(){
   )
 }
 
+function FormAddFriend(){
+  return(
+    <form className="form-add-friend">
+      <label>🕺 Friend name</label>
+      <input type="text" />
+
+      <label>🌆Image URL</label>
+      <input type="text" />
+      <Button>Add</Button>
+    </form>
+  )
+}
+
 export default function App(){
   return(
     <div className="app">
       <div className="sidebar">
         <FriendList />
+        <FormAddFriend />
+        <Button>Add Friend</Button>
       </div>
     </div>
   )
