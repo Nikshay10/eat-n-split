@@ -5,7 +5,10 @@ export default function FormAddFriend({onAddFriend}){
     const [friend, setFriend] = useState({id: crypto.randomUUID, name: '', image: 'https://i.pravatar.cc/48',  balance: 0})
   
     return(
-      <form className="form-add-friend" onSubmit={(event) => onAddFriend(friend, event)}>
+        <form className="form-add-friend" 
+            onSubmit={(event) =>{ onAddFriend(friend, event); 
+                setFriend(() =>({...friend, name:''}))}}
+        >
         <label>🕺 Friend name</label>
         <input type="text" 
           onChange={(e) => setFriend({...friend, name: e.target.value}) } 

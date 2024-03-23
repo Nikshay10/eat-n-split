@@ -34,6 +34,11 @@ export default function App(){
 
   function addFriend(newFriend, event){
     event.preventDefault()
+
+    if(!newFriend.name || !newFriend.image) return
+
+    const id = newFriend.id
+    newFriend.image = `${newFriend.image}?=${id}`
     setFriendList([...friendList, newFriend])
   }
 
