@@ -6,8 +6,10 @@ export default function FormAddFriend({onAddFriend}){
   
     return(
         <form className="form-add-friend" 
-            onSubmit={(event) =>{ onAddFriend(friend, event); 
-                setFriend(() =>({...friend, name:''}))}}
+            onSubmit={(event) =>{ 
+                onAddFriend(friend, event); 
+                setFriend(() =>({...friend, name:''}))
+            }}
         >
         <label>🕺 Friend name</label>
         <input type="text" 
