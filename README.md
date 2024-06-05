@@ -1,8 +1,15 @@
-# Getting Started with Create React App
+# A Web Application to keep track of your bills split with your friends
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Keep track of your bills split your friends in this application made with React 
 
-## Available Scripts
+This application allows you to split bills with your friends and keep track of the amount they owe you/you owe them overall. After entering the total bill and the expenses of both you and your friend, you choose who will pay the total bill. The amount of money you owe to you friend and vice versa will be updated accordingly.
+
+Features:
+* Ability to add a new friend
+* Adding a custom image for the new friend using an image url
+* A random image url set by default
+* Choosing who pays the bill
+
 
 In the project directory, you can run:
 
